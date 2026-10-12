@@ -1,0 +1,557 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Kompas Karya — Misi Perjalanan Proyek</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f4f6f9; --card: #fff; --ink: #0f1c2f; --mut: #58667a;
+  --pri: #1b4b91; --brand: #1b4b91; --acc: #c8a24a; --line: #e0e5ed;
+  --land: #d3dcea; --ls: #9fb0c9; --nav: #0a1730;
+  --sh: 0 1px 2px rgba(10,23,48,.05), 0 6px 20px rgba(10,23,48,.05);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0a1220; --card: #101b2d; --ink: #e6ecf5; --mut: #95a4b8;
+    --brand: #4a82e8; --line: #21304a; --land: #1c2c45; --ls: #3b5075; --sh: none;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0a1220; --card: #101b2d; --ink: #e6ecf5; --mut: #95a4b8;
+  --brand: #4a82e8; --line: #21304a; --land: #1c2c45; --ls: #3b5075; --sh: none;
+}
+* { box-sizing: border-box; }
+html { scroll-padding-top: 70px; }
+body {
+  margin: 0; color: var(--ink); background: var(--bg);
+  font: 15px/1.65 "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+h1, h2, h3, h4 { font-weight: 800; letter-spacing: -.02em; line-height: 1.25; margin: .2em 0; }
+h1 { font-size: clamp(26px, 4vw, 34px); }
+h2 { font-size: 20px; margin: 1.6em 0 .6em; }
+h3 { font-size: 16px; }
+h4 { font-size: 14px; margin: .9em 0 .3em; }
+:focus-visible { outline: 2px solid var(--acc); outline-offset: 2px; }
+
+.app { display: grid; grid-template-columns: 256px minmax(0, 1fr); min-height: 100vh; }
+.side {
+  position: sticky; top: 0; height: 100vh; background: var(--nav); color: #c3cfe2;
+  display: flex; flex-direction: column; padding: 26px 14px 18px; gap: 8px; overflow-y: auto;
+}
+.brand { padding: 0 12px 20px; border-bottom: 1px solid rgba(255,255,255,.09); }
+.brand b { display: block; color: #fff; font-size: 18px; font-weight: 800; letter-spacing: .01em; }
+.brand small { font-size: 12.5px; color: #8396b3; }
+#nav { display: flex; flex-direction: column; gap: 2px; }
+.ng { font-size: 12px; font-weight: 600; color: #7487a6; margin: 18px 12px 6px; }
+#nav button {
+  display: block; border: 0; background: none; color: #c3cfe2; font: inherit;
+  font-size: 14.5px; font-weight: 600; padding: 10px 12px; border-radius: 8px; cursor: pointer; text-align: left;
+}
+#nav button:hover { background: rgba(255,255,255,.06); }
+#nav button.on { background: rgba(255,255,255,.09); color: #fff; box-shadow: inset 2px 0 0 var(--acc); }
+.sf { margin-top: auto; }
+.scrim { display: none; }
+#pl { display: flex; flex-direction: column; gap: 8px; padding: 12px; border-radius: 10px; background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.08); }
+#pl .pt { font-size: 12px; font-weight: 600; color: #8396b3; }
+#pl select { background: var(--nav); color: #e6ecf5; border-color: #2a3d5c; font-size: 13px; padding: 7px 8px; border-radius: 6px; }
+#pl .btn { background: var(--acc); color: var(--nav); justify-content: center; }
+
+.main { min-width: 0; display: flex; flex-direction: column; }
+.top {
+  position: sticky; top: 0; z-index: 10; display: flex; align-items: center; gap: 12px;
+  padding: 12px 32px; padding-top: calc(12px + env(safe-area-inset-top, 0px));
+  background: var(--card); border-bottom: 1px solid var(--line);
+}
+.ttl { flex: 1; font-size: 13px; color: var(--mut); }
+.ttl b { color: var(--ink); }
+.chips { display: flex; gap: 8px; }
+.chip { display: inline-flex; align-items: center; gap: 7px; font-size: 12.5px; font-weight: 600; padding: 4px 12px; border-radius: 99px; background: var(--bg); border: 1px solid var(--line); }
+.chip i { width: 8px; height: 8px; border-radius: 50%; }
+.mb { display: none; border: 1px solid var(--line); background: var(--bg); color: var(--ink); font: inherit; font-size: 13px; font-weight: 700; padding: 7px 14px; border-radius: 8px; cursor: pointer; }
+
+main { flex: 1; padding: 0; }
+.wrap { max-width: 1080px; margin: 0 auto; padding: 28px 32px 40px; }
+footer { color: var(--mut); font-size: 12.5px; padding: 18px 32px; text-align: center; border-top: 1px solid var(--line); background: var(--card); }
+
+.eye { color: var(--brand); font-weight: 700; font-size: 13px; }
+.hero2 {
+  color: #fff; padding: 56px 0 84px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 900 380' preserveAspectRatio='xMaxYMid slice'%3E%3Cg fill='none' stroke='white' stroke-opacity='.1'%3E%3Cpath d='M745,190L746,196L744,203L739,208L732,213L723,218L715,221L707,225L698,228L689,231L680,233L670,234L660,234L650,233L640,232L630,231L620,229L609,227L599,224L590,220L583,215L580,208L580,202L582,195L585,190L588,184L590,179L591,173L593,167L597,162L602,156L609,152L618,148L628,146L638,144L649,142L660,142L670,142L681,143L691,146L700,150L706,154L712,159L717,164L722,169L728,173L734,178L740,183Z'/%3E%3Cpath d='M791,190L789,199L783,208L773,216L763,223L753,230L742,236L730,242L718,247L704,251L689,253L674,254L660,254L645,254L629,254L613,253L596,252L580,248L566,243L555,235L549,226L547,216L548,206L550,198L551,190L551,181L551,173L552,164L555,155L562,147L572,140L584,134L598,129L612,125L627,121L643,119L660,118L676,119L691,122L705,127L716,134L726,140L735,147L746,152L757,158L769,164L780,171L788,180Z'/%3E%3Cpath d='M832,190L826,202L817,213L806,224L795,234L784,243L770,252L755,259L737,265L718,269L699,271L679,273L660,275L639,278L617,279L594,279L571,275L552,268L537,259L527,247L522,234L520,222L518,211L515,200L512,190L508,178L507,167L511,155L518,144L530,133L544,124L560,116L577,109L595,103L616,98L637,95L660,95L681,99L700,105L716,112L731,119L747,126L763,131L781,137L799,144L816,153L827,164L833,177Z'/%3E%3Cpath d='M866,190L859,204L851,218L841,232L830,245L815,256L797,267L776,275L754,281L731,286L708,291L685,296L660,302L632,306L603,307L575,304L549,296L529,285L515,270L505,256L498,242L491,229L482,216L473,203L466,190L463,175L465,160L472,146L484,133L498,120L514,108L533,97L554,87L578,79L605,75L632,74L660,78L684,84L707,91L728,97L749,102L773,107L798,112L823,119L845,130L860,143L869,158L870,174Z'/%3E%3Cpath d='M900,190L896,207L889,224L879,240L864,255L844,269L821,279L796,289L771,297L746,306L720,316L691,325L660,333L625,336L591,333L559,325L533,311L513,296L497,280L483,265L469,251L454,237L439,223L427,207L420,190L420,172L426,155L435,138L448,121L463,105L481,90L504,76L531,65L562,59L596,57L629,59L660,65L688,70L715,74L743,77L773,79L805,83L837,90L864,102L885,117L897,135L903,153L903,172Z'/%3E%3Cpath d='M939,190L936,210L928,230L913,248L892,264L868,279L843,292L818,304L793,318L766,333L735,346L699,357L660,362L619,360L581,352L549,338L522,322L499,306L477,291L454,277L432,263L410,247L393,229L383,210L379,190L381,169L387,149L396,129L407,108L424,89L447,71L477,57L513,48L552,44L590,45L626,48L660,50L692,51L726,50L763,50L802,52L840,59L873,71L899,87L916,107L928,128L934,148L938,169Z'/%3E%3Cpath d='M980,190L974,213L960,234L940,254L916,272L893,289L870,307L847,326L821,345L789,364L750,378L706,385L660,385L615,376L576,363L541,348L510,334L479,320L448,307L418,293L390,276L368,257L352,235L344,213L340,190L340,166L342,142L348,118L362,94L385,72L418,55L458,43L501,37L544,35L585,34L622,32L660,29L699,23L741,20L786,20L830,26L869,38L901,55L926,76L944,98L959,120L971,143L978,166Z'/%3E%3Cpath d='M1015,190L1003,215L985,238L964,260L945,281L928,304L909,328L886,353L854,376L812,394L763,403L710,404L660,397L613,386L571,374L531,362L492,351L453,339L415,326L380,309L352,288L331,265L316,241L304,216L295,190L289,162L289,134L299,107L322,81L357,60L400,45L447,36L494,30L536,24L576,17L616,7L659,-2L707,-9L757,-11L806,-6L852,5L891,22L924,43L952,65L976,88L996,112L1011,137L1018,163Z'/%3E%3Cpath d='M1039,190L1025,216L1011,242L1000,268L990,295L977,325L957,355L925,382L881,403L828,415L770,418L713,414L660,407L610,398L563,390L515,383L469,373L423,360L383,343L348,322L320,298L295,273L274,247L254,219L239,190L232,158L238,127L260,98L297,73L342,54L391,41L438,30L481,18L521,5L563,-10L608,-25L659,-36L714,-41L770,-38L822,-27L869,-10L910,8L948,29L983,52L1012,76L1035,103L1046,132L1047,161Z'/%3E%3Cpath d='M1060,190L1056,218L1054,248L1054,280L1049,314L1033,348L1002,379L956,404L898,419L836,426L774,426L715,424L660,420L605,418L551,414L497,407L445,395L398,378L356,358L319,334L284,310L251,283L220,255L194,223L180,190L183,155L204,122L241,93L287,70L335,51L380,34L420,16L458,-3L499,-24L546,-44L600,-59L659,-67L720,-65L779,-57L834,-43L885,-27L934,-8L978,13L1017,37L1047,66L1064,97L1070,129L1067,160Z'/%3E%3Cpath d='M1097,190L1108,222L1118,258L1122,296L1110,334L1080,368L1032,396L972,415L907,427L841,433L779,436L719,440L660,442L599,443L539,438L481,428L427,413L377,394L330,372L284,349L238,325L194,296L159,264L138,228L137,190L156,153L191,120L235,92L279,68L318,44L353,20L388,-6L427,-33L474,-58L530,-76L594,-87L659,-89L725,-84L788,-74L848,-62L907,-47L961,-27L1009,-3L1045,26L1069,59L1081,93L1086,126L1089,158Z'/%3E%3C/g%3E%3C/svg%3E") right center/cover no-repeat, linear-gradient(180deg,#0a1730,#10264b);
+}
+.hero2 .wrap { padding-top: 0; padding-bottom: 0; }
+.hero2 h1 { color: #fff; font-size: clamp(30px, 4.6vw, 46px); margin: .15em 0; }
+.hero2 p { color: #b4c2d9; max-width: 52ch; margin: .6em 0 0; font-size: 16px; }
+.hero2 .eye { color: var(--acc); }
+
+.pull { margin-top: -52px; position: relative; z-index: 2; }
+.card { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 20px; margin-bottom: 14px; box-shadow: var(--sh); }
+.grid { display: grid; gap: 14px; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); }
+.grid > .card { margin: 0; }
+.g2 { grid-template-columns: 1fr 1fr; }
+
+.login h2 { margin: 0 0 4px; }
+.login p { margin: 0 0 14px; }
+.lg { display: flex; gap: 12px; flex-wrap: wrap; }
+.lg select { flex: 1; min-width: 220px; width: auto; }
+
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; border: 0; border-radius: 8px;
+  padding: 10px 20px; background: var(--brand); color: #fff; font: inherit; font-size: 14px; font-weight: 700;
+  cursor: pointer; text-decoration: none; transition: filter .15s;
+}
+.btn:hover { filter: brightness(1.1); }
+.btn.o { background: none; color: var(--brand); box-shadow: inset 0 0 0 1.5px var(--brand); }
+.btn.s { padding: 6px 12px; font-size: 13px; }
+.btn.d { background: var(--nav); box-shadow: inset 0 0 0 1px rgba(255,255,255,.14); }
+
+.tag { display: inline-block; font-size: 12px; padding: 2px 10px; border-radius: 99px; color: #fff; font-weight: 600; vertical-align: middle; }
+
+select, textarea, input {
+  width: 100%; font: inherit; font-size: 14px; color: var(--ink); background: var(--card);
+  border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px;
+}
+textarea { min-height: 84px; }
+select:focus, textarea:focus, input:focus { outline: none; border-color: var(--brand); box-shadow: 0 0 0 3px color-mix(in srgb, var(--brand) 20%, transparent); }
+
+.pb { height: 6px; border-radius: 9px; background: var(--line); overflow: hidden; }
+.pb i { display: block; height: 100%; background: var(--pri); border-radius: 9px; }
+
+.row { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+.mut { color: var(--mut); }
+
+.step { display: flex; gap: 14px; align-items: flex-start; }
+.sn { flex: none; width: 30px; height: 30px; border-radius: 8px; background: var(--nav); color: #fff; display: grid; place-items: center; font-weight: 800; font-size: 14px; }
+.step b { display: block; }
+
+.ban { display: flex; gap: 14px; align-items: center; justify-content: space-between; flex-wrap: wrap; background: var(--card); border: 1px solid var(--line); border-left: 5px solid var(--c); border-radius: 12px; padding: 18px 20px; box-shadow: var(--sh); }
+.ban b { font-size: 18px; }
+.bs { color: var(--mut); font-size: 13.5px; }
+
+.mapz { margin: 36px auto 0; max-width: 880px; }
+.mapz p { margin: 0 0 6px; font-size: 13.5px; }
+.mimg { display: none; width: 100%; height: auto; }
+#mp { display: block; width: 100%; height: auto; max-height: 480px; }
+.land { fill: var(--land); stroke: var(--ls); stroke-width: 1; stroke-linejoin: round; }
+.pin { cursor: pointer; }
+
+table { border-collapse: collapse; width: 100%; }
+th, td { padding: 8px 6px; text-align: center; border-bottom: 1px solid var(--line); }
+th { font-size: 12.5px; color: var(--mut); font-weight: 700; }
+td:first-child, th:first-child { text-align: left; }
+.tw { overflow-x: auto; }
+td.c button { width: 34px; height: 34px; border-radius: 8px; border: 2px solid transparent; color: #fff; font-weight: 700; cursor: pointer; }
+td.c button.sel { border-color: var(--ink); }
+td.c small { display: block; font-size: 11px; color: var(--mut); }
+
+.stat { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-bottom: 14px; }
+.stat .card { margin: 0; }
+.stat b { font-size: 28px; font-weight: 800; color: var(--brand); display: block; line-height: 1.2; }
+
+.chk { display: flex; gap: 10px; align-items: center; padding: 8px 0; border-bottom: 1px solid var(--line); }
+.chk input { width: 20px; height: 20px; flex: none; accent-color: var(--brand); }
+
+.em { display: grid; grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); gap: 8px; margin: 12px 0; }
+.em button { font: inherit; font-size: 14px; font-weight: 600; border: 1px solid var(--line); background: var(--card); color: var(--ink); border-radius: 8px; padding: 12px 6px; cursor: pointer; }
+.em button:hover { border-color: var(--brand); background: var(--bg); }
+
+.g4 { grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 10px; }
+.slot { aspect-ratio: 1; border: 1px solid var(--line); border-radius: 10px; background: var(--bg); position: relative; overflow: hidden; padding: 0; cursor: pointer; }
+.slot img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.slot span { position: absolute; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,.6); color: #fff; font-size: 12px; padding: 3px; text-align: center; }
+
+#tt { position: fixed; left: 50%; bottom: 28px; transform: translateX(-50%); background: var(--nav); color: #fff; padding: 10px 18px; border-radius: 10px; z-index: 60; display: none; max-width: 90vw; font-size: 14px; box-shadow: 0 8px 24px rgba(0,0,0,.25); }
+#md { position: fixed; inset: 0; background: rgba(5,10,18,.6); display: none; place-items: center; z-index: 50; padding: 16px; }
+#md.on { display: grid; }
+#md .card { width: min(440px, 100%); max-height: 90vh; overflow: auto; margin: 0; }
+#md img, #gp img { width: 100%; border-radius: 10px; margin: 8px 0; }
+
+.tabs { display: flex; gap: 8px; overflow-x: auto; padding: 4px 0 14px; }
+.tb { flex: none; display: flex; flex-direction: column; align-items: center; min-width: 96px; border: 1px solid var(--line); background: var(--card); color: var(--ink); border-radius: 10px; padding: 8px 10px; cursor: pointer; font: inherit; }
+.tb b { font-size: 15px; }
+.tb small { font-size: 11px; max-width: 84px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.tb i { font-style: normal; font-size: 11px; color: var(--mut); }
+.tb.on { background: var(--brand); color: #fff; border-color: var(--brand); }
+.tb.on i { color: #fff; }
+
+.sb { border-radius: 12px; color: #fff; padding: 22px 24px; margin-bottom: 14px; background: var(--nav); border-left: 6px solid var(--a); }
+.sb:before, .rl { display: none; }
+.sbt small { opacity: .8; font-weight: 600; }
+.sbt h2 { font-size: clamp(22px, 4vw, 30px); margin: 2px 0; }
+.sbt div { color: #c3cfe2; }
+
+.win { background: var(--card); border: 1px solid var(--line); border-radius: 12px; margin-bottom: 14px; overflow: hidden; box-shadow: var(--sh); }
+.win .wc { padding: 20px; }
+.wb { background: #16243c; color: #c3cfe2; padding: 9px 16px; font: 12px ui-monospace, monospace; }
+
+.note { font-size: 13.5px; padding: 9px 12px; border-radius: 8px; background: var(--bg); border: 1px solid var(--line); border-left: 3px solid var(--acc); margin: 8px 0; }
+.note.lock { border-left-color: #b3261e; }
+.dim { opacity: .5; }
+details.card summary { cursor: pointer; }
+
+@media (prefers-reduced-motion: reduce) { .side { transition: none !important; } }
+@media (max-width: 900px) {
+  .app { display: block; }
+  .side { position: fixed; left: 0; top: 0; bottom: 0; width: 272px; z-index: 40; transform: translateX(-100%); transition: transform .25s; }
+  body.dro .side { transform: none; }
+  .scrim { position: fixed; inset: 0; background: rgba(5,10,18,.55); z-index: 30; display: none; }
+  body.dro .scrim { display: block; }
+  .mb { display: inline-block; }
+  .top { padding-left: 16px; padding-right: 16px; }
+  .wrap { padding: 22px 16px 32px; }
+  .hero2 .wrap { padding: 0 16px; }
+  .hero2 { padding: 36px 0 64px; }
+  .pull { margin-top: -40px; }
+  footer { padding: 16px; }
+  .chips .chip:nth-child(2) { display: none; }
+}
+@media (max-width: 560px) {
+  .g2 { grid-template-columns: 1fr; }
+  .stat b { font-size: 22px; }
+}
+</style>
+</head>
+<body>
+<div class="app">
+  <aside class="side" id="sd">
+    <div class="brand"><b>Kompas Karya</b><small>Misi Perjalanan Proyek</small></div>
+    <nav id="nav" aria-label="Menu utama"></nav>
+    <div class="sf"><div id="pl"></div></div>
+  </aside>
+  <div class="scrim" onclick="dr(false)"></div>
+  <div class="main">
+    <header class="top">
+      <button class="mb" id="mbtn" onclick="dr()" aria-label="Buka menu"></button>
+      <div class="ttl">Kompas Karya / <b id="crumb"></b></div>
+      <div class="chips" id="chips"></div>
+    </header>
+    <main id="app"></main>
+    <footer>Kompas Karya · Panduan Misi Perjalanan Proyek · Merchandise Pariwisata Budaya Jawa Timur</footer>
+  </div>
+</div>
+<div id="tt"></div>
+<div id="md"></div>
+
+<script>
+const PASS = "132465", D1 = "https://drive.google.com/drive/folders/1OA-T8jLVydIbctEf5n9iP8AImjHR4hWN?usp=drive_link", D2 = "https://drive.google.com/drive/folders/1J2-mA05FuBsHgBWr_EQLWSaDeMXXXhxA";
+const GR = [
+  { n: "Ponorogo", t: "Reog Ponorogo", i: "🦚", c: "#b3261e", lo: 111.46, la: -7.87 },
+  { n: "Madiun", t: "Pecel & Pencak Silat", i: "🥗", c: "#b8741a", lo: 111.52, la: -7.63 },
+  { n: "Malang", t: "Kota Apel & Topeng Malangan", i: "🍎", c: "#2f7d4f", lo: 112.63, la: -7.98 },
+  { n: "Surabaya", t: "Tugu Pahlawan & Suro-Boyo", i: "🦈", c: "#1f5a9c", lo: 112.75, la: -7.25 },
+  { n: "Madura", t: "Suramadu & Karapan Sapi", i: "🐂", c: "#7a3b8c", lo: 113.47, la: -7.16 },
+  { n: "Banyuwangi", t: "Kawah Ijen & Tari Gandrung", i: "🌋", c: "#0f7f8f", lo: 114.37, la: -8.22 }
+];
+const ST = [
+  { n: "Research", s: "Riset & Identifikasi", d: "Mengidentifikasi potensi budaya dan pariwisata daerah Jawa Timur sesuai daerah yang dipilih sebagai dasar perancangan lini produk merchandise.", c: ["Menentukan daerah riset di Jawa Timur", "Mengumpulkan data potensi wisata & budaya", "Membuat mindmap potensi daerah", "Mengidentifikasi elemen visual khas daerah", "Mendokumentasikan referensi visual", "Menyusun laporan riset awal"] },
+  { n: "Design Brief", s: "Menentukan Arah Perancangan", d: "Menyusun Design Brief sebagai panduan arah perancangan merchandise berdasarkan hasil riset potensi daerah.", c: ["Menyusun Design Brief tertulis", "Menentukan target audiens produk", "Menetapkan konsep visual utama", "Membuat moodboard referensi", "Menentukan palet warna & tipografi", "Menetapkan jenis merchandise"] },
+  { n: "Eksplorasi Visual", s: "Moodboard, Mindmap & Sketsa", d: "Mengembangkan referensi visual dan alternatif desain secara terarah melalui moodboard, mindmap, dan thumbnail sketch.", c: ["Membuat moodboard", "Eksplorasi warna & tipografi", "Membuat mindmap eksplorasi konsep visual", "Membuat thumbnail sketch"] },
+  { n: "Final Design", s: "Penyelesaian Desain Akhir", d: "Menyelesaikan dan menyempurnakan seluruh aset desain merchandise hingga siap diproduksi.", c: ["Finalisasi layout & komposisi desain", "Desain final 3 kaos & 3 tote bag (full color A4)", "Desain final 2 tumbler, 2 PIN & gantungan kunci, 2 stiker", "Revisi berdasarkan feedback guru", "Cek konsistensi warna (CMYK)", "Simpan file vector (ai/cdr) & PNG resolusi cetak"] },
+  { n: "Merchandise Production", s: "Produksi Merchandise", d: "Memproduksi merchandise secara nyata sesuai Final Design yang disetujui, dengan memperhatikan kualitas bahan, teknik produksi, dan kesesuaian konsep (minimal 4 produk).", c: ["Aplikasikan desain pada kaos", "Aplikasikan desain pada tote bag", "Aplikasikan desain pada stiker", "Aplikasikan desain pada tumbler", "Memilih vendor atau metode produksi yang sesuai"] },
+  { n: "Packaging", s: "Perancangan Kemasan", d: "Merancang kemasan produk yang fungsional, estetis, dan mencerminkan identitas budaya Jawa Timur sebagai satu kesatuan lini produk.", c: ["Merancang kemasan produk merchandise", "Membuat desain label dan hang tag", "Membuat kartu informasi wisata", "Memadukan elemen visual budaya daerah", "Membuat mockup digital kemasan", "Memfinalisasi desain siap cetak"] },
+  { n: "Marketing", s: "Pemasaran Produk", d: "Menyusun dan melaksanakan strategi pemasaran produk secara terarah, kreatif, dan terukur.", c: ["Menyusun strategi marketing mix (4P)", "Membuat foto produk, poster & konten Instagram", "Membuat video promosi", "Menentukan target pasar dan segmentasi", "Membuat katalog produk digital", "Menyiapkan display dan harga produk"] },
+  { n: "Exhibition & Presentation", s: "Pameran dan Presentasi", d: "Menampilkan hasil proyek melalui pameran dan presentasi yang profesional kepada audiens (PjBL Merchandise Exhibition).", c: ["Menyiapkan booth/stand pameran yang menarik", "Menata display produk dan kemasan", "Membuat poster atau banner presentasi", "Menyiapkan materi presentasi (slide/portofolio)", "Melakukan simulasi presentasi kelompok", "Mempresentasikan proyek di depan juri/guru", "Mendokumentasikan kegiatan pameran", "Mengumpulkan feedback dari pengunjung"] }
+];
+const E = [["", "Semangat"], ["", "Senang"], ["", "Biasa saja"], ["", "Cemas"], ["", "Lelah"], ["", "Sedih"]];
+const SN = ["Belum Dimulai", "Dalam Proses", "Perlu Revisi", "Selesai Terverifikasi"], SY = ["–", "…", "!", "✓"], SC = ["#9a8c7d", "#c27a10", "#b3261e", "#2f7d4f"];
+const HOW = [
+  ["📖", "Baca Tujuan Tahap", "Pahami target sebelum mulai."],
+  ["😊", "Check-in Emosi", "Pilih perasaanmu sebelum bekerja."],
+  ["", "Kerjakan Checklist", "Satu checklist per pertemuan; simpan dan lanjutkan di pertemuan berikutnya."],
+  ["", "Kumpulkan Tugas", "Klik ikon pengumpulan ke Google Drive."],
+  ["", "Umpan Balik Guru", "Baca masukan dan sampaikan keluhanmu."],
+  ["🚀", "Lanjut Tahap", "Setelah guru menyetujui, lanjut!"]
+];
+const OUT = [[111.45, -6.80], [111.75, -6.86], [112.05, -6.88], [112.35, -6.88], [112.58, -7.08], [112.72, -7.20], [112.80, -7.40], [112.92, -7.62], [113.20, -7.72], [113.60, -7.72], [113.98, -7.70], [114.25, -7.80], [114.42, -8.00], [114.38, -8.25], [114.40, -8.45], [114.50, -8.70], [114.25, -8.72], [113.90, -8.45], [113.45, -8.35], [113.05, -8.25], [112.65, -8.40], [112.25, -8.32], [111.85, -8.30], [111.45, -8.30], [111.10, -8.20], [110.95, -8.00], [111.00, -7.65], [111.15, -7.35], [111.30, -7.10]], MAD = [[112.72, -7.14], [112.95, -7.00], [113.25, -6.92], [113.6, -6.88], [113.95, -6.92], [114.2, -7.0], [114.12, -7.1], [113.8, -7.13], [113.5, -7.12], [113.2, -7.18], [112.92, -7.2]];
+const sm = a => {
+  const p = a.map(PJ), n = p.length, f = v => v.toFixed(1);
+  let d = "M" + f(p[0][0]) + "," + f(p[0][1]);
+  for (let i = 0; i < n; i++) {
+    const p0 = p[(i + n - 1) % n], p1 = p[i], p2 = p[(i + 1) % n], p3 = p[(i + 2) % n];
+    d += "C" + f(p1[0] + (p2[0] - p0[0]) / 6) + "," + f(p1[1] + (p2[1] - p0[1]) / 6) + " " + f(p2[0] - (p3[0] - p1[0]) / 6) + "," + f(p2[1] - (p3[1] - p1[1]) / 6) + " " + f(p2[0]) + "," + f(p2[1])
+  } return d + "Z"
+};
+const PJ = a => [(a[0] - 110.8) * 100, (-a[1] - 6.6) * 100], poly = a => "M" + a.map(p => PJ(p).map(v => v.toFixed(1)).join(",")).join("L") + "Z";
+const $ = s => document.querySelector(s), esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const ld = (k, d) => { try { return JSON.parse(localStorage.getItem(k)) || d } catch (e) { return d } }, sv = (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)) } catch (e) {} };
+
+let UI = ld("gps3u", { sel: 0, stg: 0, tc: [0, 0], r: "home" }), D = ld("gps3", {}), AU = false, dbc = null, rst = 0;
+try { AU = sessionStorage.getItem("gps3a") == "1" } catch (e) {}
+const su = () => sv("gps3u", UI), now = () => new Date().toLocaleString("id-ID", { day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" });
+const gd = g => D[g] || (D[g] = { mem: Array.from({ length: 6 }, () => ["", ""]), st: {}, ci: [], iss: [], rf: [] });
+const cl = (g, s) => { const d = gd(g); return d.st[s] || (d.st[s] = { st: 0, ck: [], fb: "" }) };
+function pst(g) { sv("gps3", D); if (dbc) try { dbc.doc("g" + g).set(D[g]).catch(() => {}) } catch (e) {} }
+const nck = (g, s) => ST[s].c.filter((_, i) => cl(g, s).ck[i]).length, prog = g => Math.round(ST.reduce((a, _, s) => a + nck(g, s), 0) / ST.reduce((a, x) => a + x.c.length, 0) * 100), act = g => { const i = ST.findIndex((_, s) => cl(g, s).st != 3); return i < 0 ? 7 : i };
+const tag = s => `<span class="tag" style="background:${SC[s]}">${SN[s]}</span>`, lastE = g => { const c = gd(g).ci; return c.length ? E[c[c.length - 1].e][1] : "·" };
+function toast(m) { const t = $("#tt"); t.textContent = m; t.style.display = "block"; clearTimeout(toast.i); toast.i = setTimeout(() => t.style.display = "none", 2500) }
+const gsel = () => `<select onchange="pick(+this.value)">${GR.map((g, i) => `<option value="${i}" ${i == UI.sel ? "selected" : ""}>Kelompok ${g.n}</option>`).join("")}</select>`;
+const ssel = () => `<select onchange="UI.stg=+this.value;su();go()">${ST.map((x, i) => `<option value="${i}" ${i == UI.stg ? "selected" : ""}>Tahap ${i + 1}: ${esc(x.n)}</option>`).join("")}</select>`;
+function pick(i) { const n = $("#gn"); if (n) TMP = n.value; UI.sel = i; delete UI.mus; su(); if (pl) play(); go() }
+function nav(r) { dr(false); if (!UI.in && r != "home" && r != "guru") { toast("Isi nama kelompok dan klik Masuk dulu ya"); r = "home" } UI.r = r; su(); go(); scrollTo(0, 0) }
+
+const V = {
+  home() {
+    const g = UI.sel, G = GR[g], a = act(g), I = UI.in;
+    const pins = GR.map((x, i) => {
+      const [px, py] = PJ([x.lo, x.la]), on = i == g, e = i == 5;
+      return `<g class="pin" transform="translate(${px} ${py})" ${I ? "" : `onclick="pick(${i})"`}>${on ? `<circle r="11" fill="none" stroke="${x.c}" stroke-opacity=".45"/>` : ""}<circle r="${on ? 6.5 : 5}" fill="${x.c}" stroke="#fff" stroke-width="2"/><text x="${e ? -11 : 11}" y="3.5" text-anchor="${e ? "end" : "start"}" font-size="8" font-weight="${on ? 800 : 600}" fill="var(--ink)" stroke="var(--bg)" stroke-width="3" paint-order="stroke">${x.n}</text></g>`
+    }).join("");
+    const head = `<section class="hero2"><div class="wrap"><div class="eye">Project Based Learning · DKV</div><h1>Misi Perjalanan Proyek</h1><p>Panduan perancangan lini produk merchandise pariwisata budaya Jawa Timur, dari riset sampai pameran.</p></div></section>`;
+    const entry = I ? `<div class="ban pull" style="--c:${G.c}"><div><b>Halo, Kelompok ${G.n}</b><div class="bs">Daerah riset ${G.n} · Tahap aktif ${a + 1}: ${esc(ST[a].n)}</div></div><span class="row"><button class="btn" onclick="nav('misi')">Mulai Misi Kita</button><button class="btn o" onclick="UI.in=false;su();go()">Ganti kelompok</button></span></div>` : `<div class="card login pull"><h2>Masuk ke panduan</h2><p class="mut">Pilih daerah riset kelompokmu, lalu klik Masuk.</p><div class="lg">${gsel()}<button class="btn" onclick="masuk()">Masuk</button></div></div>`;
+    const map = `<div class="mapz"><h3>Peta lokasi riset</h3><p class="mut">Enam daerah riset di Jawa Timur.</p><img class="mimg" src="peta-jatim.png" alt="Peta Jawa Timur" onload="this.nextElementSibling.style.display='none';this.style.display='block'" onerror="this.remove()"><svg id="mp" viewBox="0 10 400 215" role="img" aria-label="Peta Jawa Timur"><path class="land" d="${sm(OUT)}"/><path class="land" d="${sm(MAD)}"/>${pins}</svg></div>`;
+    const more = I ? `<h2 id="how">Cara Menggunakan Panduan</h2><div class="grid">${HOW.map((h, i) => `<div class="card step"><span class="sn">${i + 1}</span><div><b>${h[1]}</b><div class="mut">${h[2]}</div></div></div>`).join("")}</div><h2>Perjalanan Semua Kelompok</h2><div class="grid">${GR.map((x, i) => `<div class="card" style="border-top:4px solid ${x.c}"><h3>${x.n}</h3>${gd(i).gn ? `<div class="mut">${esc(gd(i).gn)}</div>` : ""}<div class="row" style="justify-content:space-between;margin:10px 0 6px"><span class="mut">Tahap ${act(i) + 1}</span><b>${prog(i)}%</b></div><div class="pb"><i style="width:${prog(i)}%;background:${x.c}"></i></div></div>`).join("")}</div>` : "";
+    return head + `<div class="wrap">` + entry + map + more + `</div>`
+  },
+  misi() {
+    const g = UI.sel, s = UI.stg, S = ST[s], c = cl(g, s), d = gd(g), G = GR[g], td = today(), ci = d.ci.filter(x => x.s == s), cit = ci.filter(x => x.dt == td), my = d.iss.filter(q => q.s == s);
+    c.cd = c.cd || {}; const lk = c.fin && c.st != 2, free = c.ed || c.st == 2 || c.ul == td, dn = Object.keys(c.cd).filter(k => c.cd[k] == td && c.ck[k]).length, cap = !free && dn >= 1; c.mem = c.mem || initMem(g, s);
+    const tabs = `<div class="tabs">${ST.map((x, i) => `<button class="tb ${i == s ? "on" : ""}" onclick="UI.stg=${i};su();go()"><b>${i + 1}</b><small>${esc(x.n)}</small><i>${SY[cl(g, i).st]}</i></button>`).join("")}</div>`;
+    const banner = `<div class="sb" style="--a:${PAL[s][0]};--b:${PAL[s][1]}"><div class="rl"></div><div class="sbt"><small>Tahap ${s + 1} dari 8</small><h2>${esc(S.n)}</h2><div>${esc(S.s)}</div></div></div>`;
+    const emo = `<div class="em">${E.map((e, i) => `<button onclick="chin(${i})">${e[1]}</button>`).join("")}</div>`;
+    let body;
+    if (!cit.length && !lk) body = `<div class="card"><h2>Check-in Emosi</h2><p>Sebelum mulai mengerjakan Tahap ${s + 1}, bagaimana perasaanmu hari ini? Pilih satu, ya.</p>${emo}<input id="cn" placeholder="Ceritakan singkat (boleh dikosongkan)"></div>`;
+    else {
+      const l = ci[ci.length - 1];
+      const info = lk ? `<div class="note lock">Tahap ini sudah dikerjakan & disimpan (${esc(c.ts || "")}). Klik "Edit / Revisi" jika ingin mengubah.</div>` : (c.ed || c.st == 2) ? `<div class="note">Mode edit / revisi aktif — checklist bisa diubah.</div>` : c.ul == td ? `<div class="note">Kamu bisa melanjutkan beberapa checklist hari ini. Progres tersimpan otomatis.</div>` : `<div class="note">Pertemuan hari ini: ${dn}/1 checklist. Progres tersimpan otomatis. ${cap ? `<button class="btn o s" onclick="lanjutHari()">Lanjutkan checklist berikutnya sekarang</button>` : ""}</div>`;
+      body = `${l ? `<div class="card row" style="justify-content:space-between"><span>Check-in: <b>${E[l.e][1]}</b> <span class="mut">· ${esc(l.d)}</span></span>${lk ? "" : `<button class="btn o s" onclick="$('#ck2').hidden=false;this.hidden=true">Check-in lagi</button>`}</span></div><div class="card" id="ck2" hidden>${emo}<input id="cn" placeholder="Catatan singkat"></div>` : ""}
+<div class="card"><h3>Anggota & Tugas — Tahap ${s + 1}</h3><p class="mut" style="margin:0 0 6px">Isi nama dan tugas tiap anggota untuk tahap ini. Langsung terlihat di Ruang Guru.</p>${c.mem.map((m, i) => `<div class="grid g2" style="gap:8px;margin:6px 0"><input placeholder="Nama murid ${i + 1}" value="${esc(m[0])}" ${lk ? "disabled" : ""} onchange="mset(${i},0,this.value)"><input placeholder="Tugas di tahap ini" value="${esc(m[1])}" ${lk ? "disabled" : ""} onchange="mset(${i},1,this.value)"></div>`).join("")}</div>
+<div class="win"><div class="wb"><span>Tahap-${s + 1}_${S.n.replace(/\W+/g, "")}.${EXT[s]}</span></div><div class="wc"><h2>Tahap ${s + 1}: ${esc(S.n)} ${tag(c.st)}</h2><p><b>Tujuan:</b> ${esc(S.d)}</p><h3>Checklist (${nck(g, s)}/${S.c.length})</h3>${info}${S.c.map((x, i) => { const on = !!c.ck[i], ds = lk || (!on && cap) || (on && !free && c.cd[i] != td); return `<label class="chk ${ds && !on ? "dim" : ""}"><input type="checkbox" ${on ? "checked" : ""} ${ds ? "disabled" : ""} onchange="chk(${i},this.checked)">${esc(x)}${c.cd[i] ? `<small class="mut"> · ${esc(c.cd[i])}</small>` : ""}</label>` }).join("")}
+<p class="row" style="margin-top:14px"><a class="btn d" href="${esc(S.l)}" target="_blank" rel="noopener">Pengumpulan Tugas (Google Drive)</a>${c.st == 2 ? `<button class="btn o" onclick="resend()">Kirim ulang ke guru</button>` : ""}</p>
+<p class="row">${lk ? `<button class="btn o" onclick="editStage()">Edit / Revisi</button>` : `<button class="btn o" onclick="toast('Progres tersimpan. Lanjutkan di pertemuan berikutnya')">Simpan Progres</button><button class="btn" onclick="lanjut()">${s < 7 ? "Simpan & Lanjut ke Tahap Berikutnya" : "Simpan & Selesai"}</button>`}</p></div></div>
+<div class="card"><h3>Umpan Balik Guru</h3><p class="${c.fb ? "" : "mut"}">${c.fb ? esc(c.fb) : "Belum ada umpan balik untuk tahap ini."}</p><h3>Keluhan / Kendala yang Kamu Alami</h3><p class="mut" style="margin:0 0 6px">Ceritakan agar guru bisa membantu. Pesan langsung masuk ke Ruang Guru.</p><textarea id="kd"></textarea><p><button class="btn s" onclick="kendala()">Kirim ke guru</button></p>${my.map(q => `<div class="mut" style="border-top:1px dashed var(--line);padding:6px 0">${esc(q.d)} — ${esc(q.t)}</div>`).join("")}</div>`
+    }
+    return `<div class="eye">Misi Kita</div><h1>Kelompok ${G.n}</h1>${tabs}<div class="stw t${s}">${banner}${body}</div>`
+  },
+  refleksi() {
+    const g = UI.sel, d = gd(g); return `<div class="eye">Metakognisi</div><h1>Jurnal Refleksi</h1><p class="mut">Tulis refleksi singkat setelah menyelesaikan setiap tahap.</p>${ssel()}<div class="card" style="margin-top:12px"><ul class="mut"><li>Apa yang kami pelajari tentang budaya daerah kami?</li><li>Kesulitan terbesar dan cara mengatasinya?</li><li>Apa yang akan kami lakukan berbeda di tahap berikutnya?</li></ul><textarea id="rf"></textarea><p><button class="btn s" onclick="refl()">Simpan refleksi</button></p></div>${d.rf.slice().reverse().map(r => `<div class="card"><b>Tahap ${r.s + 1} · ${esc(r.d)}</b><p>${esc(r.t)}</p></div>`).join("")}`
+  },
+  guru() {
+    if (!AU) return `<div class="eye">Khusus Guru</div><h1>Ruang Guru</h1><div class="card" style="max-width:380px;margin-top:14px"><p>Masukkan kata sandi untuk membuka halaman ini.</p><input id="pw" type="password" inputmode="numeric" placeholder="Kata sandi" onkeydown="if(event.key=='Enter')login()"><p id="pe" style="color:#b3261e;margin:6px 0"></p><button class="btn" onclick="login()">Masuk</button></div>`;
+    if (UI.gt == "e") return edV(); const [tg, ts] = UI.tc, c = cl(tg, ts); let rev = 0, kel = 0; GR.forEach((_, g) => { ST.forEach((_, s) => { if (cl(g, s).st == 2) rev++ }) }); kel += gd(g).iss.length; const avg = Math.round(GR.reduce((a, _, g) => a + prog(g), 0) / GR.length); const cie = gd(tg).ci.filter(x => x.s == ts);
+    return `<div class="row" style="justify-content:space-between"><div><div class="eye">Monitoring</div><h1>Ruang Guru</h1></div><button class="btn o s" onclick="logout()">Keluar</button></div>${GT()}<p class="mut">${dbc ? "Data terhubung ke server (sinkron antarperangkat yang login)." : "Mode lokal: menampilkan data yang tersimpan di perangkat/browser ini."} Klik kotak tahap untuk memvalidasi.</p>
+<div class="stat"><div class="card"><b>${avg}%</b>Rata-rata progres</div><div class="card"><b>${rev}</b>Perlu revisi</div><div class="card"><b>${kel}</b>Keluhan masuk</div></div>
+<div class="card"><h3>Folder Tugas di Google Drive</h3><p class="mut" style="margin:0 0 8px">Klik untuk membuka folder dan melihat tugas siswa (Tahap 1 dan Tahap 2–8 memakai folder berbeda).</p><div class="row">${ST.map((x, i) => `<a class="btn d s" href="${esc(x.l)}" target="_blank" rel="noopener">Tahap ${i + 1}</a>`).join("")}</div></div>
+<div class="card tw"><table><tr><th>Kelompok</th>${ST.map((_, i) => `<th>${i + 1}</th>`).join("")}<th>Mood</th><th>Progres (0–100%)</th></tr>${GR.map((x, g) => `<tr><td>${x.n}${gd(g).gn ? `<div class="mut" style="font-size:12px">${esc(gd(g).gn)}</div>` : ""}</td>${ST.map((_, s) => { const t = cl(g, s).st; return `<td class="c"><button class="${tg == g && ts == s ? "sel" : ""}" style="background:${SC[t]}" title="${SN[t]}" onclick="UI.tc=[${g},${s}];su();go()">${SY[t]}</button><small>${Math.round(nck(g, s) / ST[s].c.length * 100)}%</small></td>` }).join("")}<td>${lastE(g)}</td><td style="min-width:80px"><b>${prog(g)}%</b><div class="pb"><i style="width:${prog(g)}%;background:${x.c}"></i></div></td></tr>`).join("")}</table></div>
+<p class="row mut">${SN.map((n, i) => `<span><span style="color:${SC[i]}">●</span> ${n}</span>`).join("")}</p>
+<div class="card" style="border-top:5px solid ${GR[tg].c}"><h3>${GR[tg].n} · Tahap ${ts + 1}: ${esc(ST[ts].n)} ${tag(c.st)}</h3><p class="mut">${c.ts ? "Disimpan murid: " + esc(c.ts) + " · " : ""}Check-in emosi tahap ini: ${cie.length ? cie.map(x => `${E[x.e][0]} ${E[x.e][1]}${x.n ? " (" + esc(x.n) + ")" : ""}`).join(", ") : "belum ada"}</p><div>${ST[ts].c.map((t, k) => `<div>${c.ck[k] ? "✓" : "○"} ${esc(t)}${c.cd && c.cd[k] ? ` <span class="mut">· ${esc(c.cd[k])}</span>` : ""}</div>`).join("")}</div>${memT(c)}<p class="row"><a class="btn d s" href="${esc(ST[ts].l)}" target="_blank" rel="noopener">Lihat tugas Tahap ${ts + 1} di Drive</a></p><p class="row">${[1, 2, 3].map(i => `<button class="btn ${c.st == i ? "" : "o"} s" onclick="setst(${tg},${ts},${i})">${SN[i]}</button>`).join("")}</p><textarea id="fb" placeholder="Umpan balik guru untuk kelompok ini">${esc(c.fb)}</textarea><p><button class="btn s" onclick="cl(${tg},${ts}).fb=$('#fb').value;pst(${tg});toast('Umpan balik tersimpan')">Simpan umpan balik</button></p></div>
+<h3>Check-in Emosi, Keluhan & Refleksi per Kelompok</h3>${GR.map((x, g) => { const d = gd(g), mm = ST.map((_, i) => { const m = (cl(g, i).mem || []).filter(k => k[0] || k[1]); return m.length ? `<div><b>Tahap ${i + 1}:</b> ${m.map(k => esc(k[0]) + " (" + esc(k[1] || "-") + ")").join(", ")}</div>` : "" }).join(""); return `<details class="card" ${d.iss.length ? "open" : ""}><summary><b>${x.n}${gd(g).gn ? " · " + esc(gd(g).gn) : ""}</b> <span class="mut">· ${prog(g)}% · mood terakhir ${lastE(g)}</span></summary>${mm ? `<h4>Anggota & Tugas per Tahap</h4>${mm}` : ""}<h4>Riwayat Check-in</h4>${d.ci.length ? d.ci.map(k => `<div>${E[k.e][0]} ${E[k.e][1]} · Tahap ${k.s + 1} · <span class="mut">${esc(k.d)}${k.n ? " — " + esc(k.n) : ""}</span></div>`).join("") : '<p class="mut">Belum ada.</p>'}<h4>Keluhan / Kendala</h4>${d.iss.length ? d.iss.map(q => `<div>Tahap ${q.s + 1} · <span class="mut">${esc(q.d)}</span><br>${esc(q.t)}</div>`).join("") : '<p class="mut">Belum ada.</p>'}<h4>Refleksi</h4>${d.rf.length ? d.rf.map(r => `<div>Tahap ${r.s + 1} · <span class="mut">${esc(r.d)}</span><br>${esc(r.t)}</div>`).join("") : '<p class="mut">Belum ada.</p>'}</details>` }).join("")}
+<p><button class="btn o s" onclick="resetAll(this)">Reset data progres</button></p>`
+  }
+};
+
+/* aksi */
+function chin(i) { const g = UI.sel, t = ($("#cn") || {}).value || ""; gd(g).ci.push({ s: UI.stg, e: i, d: now(), dt: today(), n: t.trim() }); const c = cl(g, UI.stg); if (c.st == 0) c.st = 1; pst(g); toast("Check-in terkirim ke guru"); go() }
+function chk(i, v) {
+  const g = UI.sel, s = UI.stg, c = cl(g, s), td = today(); c.cd = c.cd || {}; if (c.fin && c.st != 2) { toast("Tahap sudah dikerjakan. Klik Edit / Revisi untuk mengubah"); return go() } const free = c.ed || c.st == 2 || c.ul == td;
+  if (v) { const n = Object.keys(c.cd).filter(k => c.cd[k] == td && c.ck[k]).length; if (!free && n >= 1) { toast("Pertemuan ini baru 1 checklist. Lanjutkan di pertemuan berikutnya"); return go() } c.ck[i] = true; c.cd[i] = td; if (c.st == 0) c.st = 1 }
+  else { if (!free && c.cd[i] != td) { toast("Hanya bisa membatalkan checklist yang dicentang hari ini"); return go() } c.ck[i] = false; delete c.cd[i] }
+  c.ck = Array.from({ length: ST[s].c.length }, (_, k) => !!c.ck[k]); pst(g); go()
+}
+function resend() { const g = UI.sel; cl(g, UI.stg).st = 1; pst(g); toast("Dikirim ulang ke guru"); go() }
+function kendala() { const t = $("#kd").value.trim(); if (!t) return; const g = UI.sel; gd(g).iss.unshift({ s: UI.stg, t, d: now() }); pst(g); toast("Terkirim ke Ruang Guru"); go() }
+function mset(i, j, v) { const c = cl(UI.sel, UI.stg); c.mem = c.mem || initMem(UI.sel, UI.stg); c.mem[i][j] = v; pst(UI.sel) }
+function refl() { const t = $("#rf").value.trim(); if (!t) return; gd(UI.sel).rf.push({ s: UI.stg, t, d: now() }); pst(UI.sel); go() }
+function setst(g, s, v) { cl(g, s).st = v; pst(g); go() }
+function login() { if ($("#pw").value === PASS) { AU = true; try { sessionStorage.setItem("gps3a", "1") } catch (e) {} go() } else { $("#pe").textContent = "Kata sandi salah."; $("#pw").value = "" } }
+function logout() { AU = false; try { sessionStorage.removeItem("gps3a") } catch (e) {} go() }
+function resetAll(b) { if (!rst) { rst = 1; b.textContent = "Klik lagi untuk menghapus SEMUA data"; return } rst = 0; GR.forEach((_, g) => { if (dbc) try { dbc.doc("g" + g).delete().catch(() => {}) } catch (e) {} }); D = {}; sv("gps3", D); go() }
+
+/* musik gamelan (disintesis, tanpa file) */
+const SL = [0, 1, 2, 3, 4].map(i => 2 ** (i / 5)), PL = [1, 1.0667, 1.2, 1.4983, 1.5874];
+const SG = [
+  { n: "Nuansa Ponorogo", b: 160, f: 261.6, s: SL, p: [0, 0, 2, 0, 3, 2, 0, 2, 4, 3, 2, 0, 3, 2, 1, 0] },
+  { n: "Nuansa Madiun", b: 110, f: 293.7, s: SL, p: [2, 3, 4, 3, 2, 0, 1, 2, 3, 4, 5, 4, 3, 2, 1, 0] },
+  { n: "Nuansa Malangan", b: 120, f: 246.9, s: PL, p: [0, 2, 4, 2, 3, 1, 2, 0, 4, 3, 2, 1, 2, 3, 4, 2] },
+  { n: "Nuansa Surabaya", b: 140, f: 277.2, s: SL, p: [4, 4, 3, 2, 3, 4, 5, 4, 3, 2, 1, 2, 3, 2, 0, 0] },
+  { n: "Nuansa Madura", b: 130, f: 233.1, s: PL, p: [0, 1, 2, 1, 0, 3, 2, 1, 4, 3, 2, 3, 1, 2, 0, 0] },
+  { n: "Nuansa Banyuwangi", b: 100, f: 261.6, s: PL, p: [0, 2, 3, 4, 3, 2, 1, 2, 3, 4, 5, 4, 2, 3, 1, 0] }
+];
+let ac, tid, stp = 0, pl = 0; const pm = () => UI.mus ?? UI.sel;
+function nt(f, t, d, v) { const o = ac.createOscillator(), o2 = ac.createOscillator(), g = ac.createGain(), g2 = ac.createGain(); o.type = "triangle"; o.frequency.value = f; o2.frequency.value = f * 2.76; g2.gain.value = .3; g.gain.setValueAtTime(v, t); g.gain.exponentialRampToValueAtTime(.001, t + d); o.connect(g); o2.connect(g2); g2.connect(g); g.connect(ac.destination); o.start(t); o2.start(t); o.stop(t + d); o2.stop(t + d) }
+function play() { try { if (!ac) ac = new (window.AudioContext || window.webkitAudioContext)(); ac.resume() } catch (e) { toast("Audio tidak didukung"); return } const S = SG[pm()]; clearInterval(tid); stp = 0; tid = setInterval(() => { const t = ac.currentTime + .05, k = S.p[stp % 16]; nt(S.f * S.s[k % 5] * 2 ** Math.floor(k / 5), t, .9, .16); if (stp % 2) nt(S.f * 2 * S.s[(k + 2) % 5], t, .5, .06); if (stp % 4 == 0) nt(S.f / 2 * S.s[S.p[0] % 5], t, 1.6, .2); if (stp % 16 == 0) nt(S.f / 4, t, 3, .22); stp++ }, 30000 / S.b); pl = 1; rp() }
+function stopm() { clearInterval(tid); pl = 0; rp() }
+function setm(v) { UI.mus = +v; su(); if (pl) play(); else rp() }
+function rp() { $("#pl").innerHTML = `<div class="pt">Musik gamelan</div><select onchange="setm(this.value)">${SG.map((s, i) => `<option value="${i}" ${i == pm() ? "selected" : ""}>${s.n}</option>`).join("")}</select><button class="btn s" onclick="${pl ? "stopm()" : "play()"}">${pl ? "Jeda" : "Putar"}</button>` }
+
+/* aksi tambahan */
+let GL = ld("gps3g", {}), galc = null, GP = null, GP2 = null, TMP = "";
+const PRD = ["Kaos", "Tote Bag", "Tumbler", "PIN & Gantungan Kunci", "Stiker", "Kemasan", "Konsep Display", "Lainnya"], WV = [28, 118, 212].map(y => `<path class="wv" d="M-40 ${y}q10-6 20 0${"t20 0".repeat(24)}" fill="none" stroke="#fff" stroke-opacity=".55" stroke-width="1.5"/>`).join("");
+const psel = v => PRD.map(p => `<option ${p == v ? "selected" : ""}>${p}</option>`).join("");
+function masuk() { UI.in = true; su(); go(); setTimeout(() => { const e = $("#how"); if (e) e.scrollIntoView({ behavior: "smooth" }) }, 60) }
+function lanjut() { const g = UI.sel, s = UI.stg, c = cl(g, s); if (nck(g, s) < ST[s].c.length) { toast("Selesaikan semua checklist dulu ya"); return } c.fin = true; c.ed = false; c.ts = now(); if (c.st == 0 || c.st == 2) c.st = 1; pst(g); if (s < 7) { UI.stg = s + 1; su(); toast("Tersimpan! Lanjut ke Tahap " + (s + 2)); go(); scrollTo(0, 0) } else { toast("Semua tahap selesai! Isi refleksi ya"); nav("refleksi") } }
+const shrink = f => new Promise((ok, no) => { const r = new FileReader(); r.onload = () => { const im = new Image(); im.onload = () => { const k = Math.min(1, 640 / Math.max(im.width, im.height)), c = document.createElement("canvas"); c.width = im.width * k; c.height = im.height * k; const x = c.getContext("2d"); x.fillStyle = "#fff"; x.fillRect(0, 0, c.width, c.height); x.drawImage(im, 0, 0, c.width, c.height); ok(c.toDataURL("image/jpeg", .65)) }; im.onerror = no; im.src = r.result }; r.onerror = no; r.readAsDataURL(f) });
+async function gpv(f, e) { if (!f) return; try { const u = await shrink(f); if (e) { GP2 = u; $("#ge").src = u } else { GP = u; $("#gp").innerHTML = `<img src="${u}" alt="">` } } catch (x) { toast("Gambar tidak bisa dibaca") } }
+function gput(id) { if (galc) { try { galc.doc(id).set(GL[id]).catch(() => toast("Gagal menyimpan ke server")) } catch (e) {} return true } try { localStorage.setItem("gps3g", JSON.stringify(GL)); return true } catch (e) { return false } }
+function gadd() { if (!GP) { toast("Pilih foto dulu ya"); return } const id = "p" + Date.now(); GL[id] = { g: UI.sel, k: $("#gk").value, cap: $("#gc").value.trim(), img: GP, t: Date.now() }; if (!gput(id)) { delete GL[id]; toast("Penyimpanan perangkat penuh. Hapus karya lama."); return } GP = null; toast("Karya ditambahkan ke galeri"); go() }
+function gedit(id) { const v = GL[id]; if (!v) return; GP2 = null; $("#md").innerHTML = `<div class="card"><h3>${GR[v.g].n}</h3><img id="ge" src="${v.img}" alt=""><input type="file" accept="image/*" onchange="gpv(this.files[0],1)"><p><select id="gk2">${psel(v.k)}</select></p><p><input id="gc2" placeholder="Judul / keterangan" value="${esc(v.cap)}"></p><div class="row"><button class="btn s" onclick="gupd('${id}')">Simpan</button><button class="btn o s" onclick="gdel('${id}',this)">Hapus</button><button class="btn o s" onclick="gx()">Tutup</button></div></div>`; $("#md").classList.add("on") }
+function gupd(id) { const v = GL[id], o = { ...v }; v.k = $("#gk2").value; v.cap = $("#gc2").value.trim(); if (GP2) v.img = GP2; if (!gput(id)) { GL[id] = o; toast("Penyimpanan perangkat penuh"); return } gx(); toast("Karya diperbarui"); go() }
+function gdel(id, b) { if (!b.dataset.s) { b.dataset.s = 1; b.textContent = "Klik lagi untuk menghapus"; return } delete GL[id]; if (galc) { try { galc.doc(id).delete().catch(() => {}) } catch (e) {} } else { try { localStorage.setItem("gps3g", JSON.stringify(GL)) } catch (e) {} } gx(); toast("Karya dihapus"); go() }
+function gx() { $("#md").classList.remove("on") }
+$("#md").addEventListener("click", e => { if (e.target.id == "md") gx() });
+V.galeri = function () {
+  const g = UI.sel, G = GR[g], it = Object.entries(GL).map(([id, v]) => ({ id, ...v })).sort((a, b) => b.t - a.t);
+  return `<div class="eye">Pameran Digital</div><h1>Portfolio Gallery</h1><p class="mut">Semua kelompok dapat menambahkan foto hasil karya. Ketuk foto untuk mengedit atau menghapus.</p>
+<div class="card" style="border-top:5px solid ${G.c}"><h3>Tambah Karya — Kelompok ${esc(gd(g).gn || G.n)}</h3><input type="file" id="gf" accept="image/*" onchange="gpv(this.files[0])"><div id="gp">${GP ? `<img src="${GP}" alt="">` : ""}</div><div class="grid g2" style="margin-top:8px"><select id="gk">${psel("")}</select><input id="gc" placeholder="Judul / keterangan karya"></div><p><button class="btn" onclick="gadd()">Simpan ke Galeri</button></p></div>
+${GR.map((x, i) => { const l = it.filter(v => v.g == i); return `<div class="card" style="border-top:5px solid ${x.c}"><div class="row" style="margin-bottom:8px"><div><h3>${x.n}${gd(i).gn ? " · " + esc(gd(i).gn) : ""}</h3><div class="mut">${l.length} karya</div></div></div>${l.length ? `<div class="grid g4">${l.map(v => `<button class="slot" onclick="gedit('${v.id}')"><img src="${v.img}" alt=""><span>${esc(v.cap || v.k)}</span></button>`).join("")}</div>` : '<p class="mut">Belum ada karya.</p>'}</div>` }).join("")}`
+};
+
+/* konten, desain tahap, edit guru */
+ST.forEach((x, i) => x.l = i ? D2 : D1);
+const DEFST = JSON.stringify(ST), DEFGR = JSON.stringify(GR); let cfg = ld("gps3c", null), cfgc = null;
+function apply(c) { if (c.gr) c.gr.forEach((x, i) => GR[i] && Object.assign(GR[i], x)); if (c.st) c.st.forEach((x, i) => ST[i] && Object.assign(ST[i], x)) }
+if (cfg) apply(cfg);
+const today = () => new Date().toLocaleDateString("sv-SE");
+function initMem(g, s) { const b = Array.from({ length: 6 }, () => ["", ""]); for (let k = s - 1; k >= 0; k--) { const m = cl(g, k).mem; if (m && m.some(x => x[0])) { m.forEach((x, i) => b[i][0] = x[0]); break } } return b }
+function lanjutHari() { const g = UI.sel, c = cl(g, UI.stg); c.ul = today(); pst(g); toast("Silakan lanjutkan checklist berikutnya"); go() }
+function editStage() { const g = UI.sel, c = cl(g, UI.stg); c.fin = false; c.ed = true; pst(g); toast("Mode edit aktif"); go() }
+const memT = c => c.mem && c.mem.some(m => m[0] || m[1]) ? `<p class="mut" style="margin:8px 0 2px"><b>Anggota & tugas tahap ini</b></p>${c.mem.filter(m => m[0] || m[1]).map(m => `<div>${esc(m[0] || "-")} — ${esc(m[1] || "-")}</div>`).join("")}` : `<p class="mut">Anggota & tugas belum diisi.</p>`;
+const GT = () => `<p class="row"><button class="btn ${UI.gt == "e" ? "o" : ""} s" onclick="UI.gt='p';su();go()">Pantau</button><button class="btn ${UI.gt == "e" ? "" : "o"} s" onclick="UI.gt='e';su();go()">Edit Konten</button></p>`;
+function edV() {
+  return `<div class="row" style="justify-content:space-between"><div><div class="eye">Pengaturan</div><h1>Ruang Guru</h1></div><button class="btn o s" onclick="logout()">Keluar</button></div>${GT()}<p class="mut">Ubah nama daerah, nama & tujuan tahap, isi checklist (satu baris = satu item), dan link pengumpulan tugas. Klik Simpan Perubahan di bawah.</p>
+<h3>Daerah (nama · tema)</h3>${GR.map((x, i) => `<div class="grid g2" style="gap:8px;margin:6px 0"><input id="eg${i}n" value="${esc(x.n)}"><input id="eg${i}t" value="${esc(x.t)}"></div>`).join("")}
+<h3>Tahap</h3>${ST.map((x, i) => `<details class="card"><summary><b>Tahap ${i + 1} — ${esc(x.n)}</b></summary><div class="grid g2" style="gap:8px;margin-top:8px"><input id="es${i}n" value="${esc(x.n)}" placeholder="Nama tahap"><input id="es${i}s" value="${esc(x.s)}" placeholder="Subjudul"></div><p><textarea id="es${i}d" placeholder="Tujuan tahap">${esc(x.d)}</textarea></p><p><textarea id="es${i}c" style="min-height:120px" placeholder="Checklist, satu baris satu item">${esc(x.c.join("\n"))}</textarea></p><input id="es${i}l" value="${esc(x.l)}" placeholder="Link pengumpulan tugas"></details>`).join("")}
+<p class="row"><button class="btn" onclick="edSave()">Simpan Perubahan</button><button class="btn o" onclick="edReset(this)">Kembalikan bawaan</button></p>`
+}
+function cput() { sv("gps3c", cfg); if (cfgc) try { cfgc.doc("main").set(cfg).catch(() => {}) } catch (e) {} }
+function edSave() { const gr = GR.map((x, i) => ({ n: $("#eg" + i + "n").value.trim() || x.n, t: $("#eg" + i + "t").value.trim() || x.t })); const st = ST.map((x, i) => { const c = $("#es" + i + "c").value.split("\n").map(t => t.trim()).filter(Boolean); return { n: $("#es" + i + "n").value.trim() || x.n, s: $("#es" + i + "s").value.trim(), d: $("#es" + i + "d").value.trim(), c: c.length ? c : x.c, l: $("#es" + i + "l").value.trim() || x.l } }); cfg = { gr, st }; apply(cfg); cput(); toast("Perubahan disimpan"); go() }
+function edReset(b) { if (!b.dataset.s) { b.dataset.s = 1; b.textContent = "Klik lagi untuk mengembalikan"; return } cfg = { gr: JSON.parse(DEFGR).map(x => ({ n: x.n, t: x.t })), st: JSON.parse(DEFST) }; apply(cfg); cput(); toast("Konten dikembalikan"); go() }
+const PAL = [["#0f7f8f", "#0b4f5c"], ["#3b4cca", "#1c2570"], ["#e8742a", "#b3261e"], ["#1e1e2e", "#3a3a6e"], ["#c27a10", "#6b3f08"], ["#b98a54", "#6f4b28"], ["#7a3b8c", "#3d1a5c"], ["#2f7d4f", "#14452a"]], EXT = ["pdf", "indd", "psd", "ai", "cdr", "dieline.ai", "prproj", "pptx"];
+const ART = [
+  `<path d="M14 22l40-8 40 8 40-8v66l-40 8-40-8-40 8z" fill="#fff" fill-opacity=".92"/><path d="M54 14v66M94 22v66" stroke="#0f7f8f" stroke-opacity=".4"/><path d="M26 60c14-26 30 8 46-16" stroke="#e8742a" stroke-width="3" fill="none" stroke-dasharray="4 3"/><circle cx="78" cy="38" r="5" fill="#e8742a"/><circle cx="118" cy="48" r="22" fill="none" stroke="#fff" stroke-width="6"/><path d="M134 64l20 20" stroke="#fff" stroke-width="8" stroke-linecap="round"/>`,
+  `<rect x="16" y="8" width="70" height="84" rx="6" fill="#fff"/><path d="M28 26h46M28 38h46M28 50h30" stroke="#3b4cca" stroke-width="4" stroke-linecap="round"/><circle cx="118" cy="58" r="28" fill="#fff"/><circle cx="118" cy="58" r="19" fill="none" stroke="#e8742a" stroke-width="5"/><circle cx="118" cy="58" r="8" fill="#e8742a"/><path d="M118 58l28-28" stroke="#ffd23f" stroke-width="4"/>`,
+  `<rect x="10" y="10" width="46" height="36" fill="#fff"/><rect x="60" y="10" width="40" height="52" fill="#ffd23f"/><rect x="10" y="50" width="46" height="40" fill="#2fb3a5"/><rect x="104" y="10" width="50" height="28" fill="#fff"/><rect x="64" y="66" width="90" height="24" fill="#fff"/><circle cx="116" cy="52" r="7" fill="#b3261e"/><circle cx="134" cy="52" r="7" fill="#7a3b8c"/><circle cx="152" cy="52" r="7" fill="#1f5a9c"/><path d="M16 20l30 18M18 62q20-14 30 6" stroke="#222" stroke-width="2" fill="none"/>`,
+  `<path d="M15 80C40 10 80 10 100 50S140 90 156 30" fill="none" stroke="#31a8ff" stroke-width="3"/><path d="M15 80L40 40M100 50L80 22M100 50L124 78M156 30L140 60" stroke="#ff61f6" stroke-width="1.5"/><g fill="#fff" stroke="#31a8ff"><rect x="12" y="77" width="6" height="6"/><rect x="97" y="47" width="6" height="6"/><rect x="153" y="27" width="6" height="6"/></g><g fill="#ff61f6"><circle cx="40" cy="40" r="3"/><circle cx="80" cy="22" r="3"/><circle cx="124" cy="78" r="3"/><circle cx="140" cy="60" r="3"/></g><rect x="20" y="8" width="14" height="10" fill="#00c8c8"/><rect x="36" y="8" width="14" height="10" fill="#ff3d81"/><rect x="52" y="8" width="14" height="10" fill="#ffd23f"/><rect x="68" y="8" width="14" height="10" fill="#222" stroke="#fff"/>`,
+  `<path d="M14 30l22-12 12 8h18l12-8 22 12-10 18-10-6v44H34V42l-10 6z" fill="#fff"/><rect x="42" y="42" width="22" height="22" rx="3" fill="#e8742a" transform="rotate(45 53 53)"/><path d="M108 40h34v48h-34z" fill="#ffd23f"/><path d="M116 40c0-14 18-14 18 0" stroke="#fff" stroke-width="3" fill="none"/><rect x="146" y="30" width="14" height="58" rx="5" fill="#fff"/>`,
+  `<g fill="#e9d3a8" stroke="#fff" stroke-width="2" stroke-dasharray="5 3"><rect x="52" y="8" width="42" height="22"/><rect x="52" y="30" width="42" height="40"/><rect x="10" y="30" width="42" height="40"/><rect x="94" y="30" width="42" height="40"/><rect x="52" y="70" width="42" height="22"/><rect x="136" y="30" width="26" height="40"/></g><circle cx="73" cy="50" r="11" fill="none" stroke="#7a5630" stroke-width="3"/><path d="M68 50l4 4 8-9" stroke="#7a5630" stroke-width="3" fill="none"/>`,
+  `<rect x="24" y="8" width="44" height="84" rx="8" fill="#fff"/><rect x="30" y="20" width="32" height="40" fill="#e8742a"/><path d="M32 70h28M32 78h18" stroke="#7a3b8c" stroke-width="3"/><path d="M88 56l36-18v46z" fill="#ffd23f"/><rect x="80" y="52" width="12" height="20" fill="#fff"/><path d="M132 48h8M134 64l8 6M134 32l8-6" stroke="#fff" stroke-width="3" stroke-linecap="round"/><g fill="#fff"><rect x="100" y="74" width="10" height="16"/><rect x="114" y="66" width="10" height="24"/><rect x="128" y="56" width="10" height="34"/></g>`,
+  `<path d="M10 28h96v6H10z" fill="#ffd23f"/><rect x="14" y="34" width="88" height="54" fill="#fff"/><rect x="24" y="46" width="22" height="22" fill="#2f7d4f"/><rect x="54" y="46" width="38" height="10" fill="#e8742a"/><rect x="54" y="60" width="28" height="8" fill="#bbb"/><path d="M118 22h30v18c0 14-30 14-30 0z" fill="#ffd23f"/><path d="M133 50v18M124 72h18v8h-18z" stroke="#ffd23f" stroke-width="5" fill="#ffd23f"/>`
+];
+
+/* render */
+const RT = [["home", "Dashboard", "map", "Utama"], ["misi", "Misi Kita", "flag", "Pengerjaan"], ["refleksi", "Refleksi", "pen", "Pengerjaan"], ["galeri", "Galeri Pameran", "img", "Pameran"], ["guru", "Ruang Guru", "lock", "Sistem"]];
+function dr(f) { document.body.classList.toggle("dro", f) }
+$("#mbtn").textContent = "Menu";
+function go() {
+  const G = GR[UI.sel]; document.documentElement.style.setProperty("--pri", G.c); let r = V[UI.r] ? UI.r : "home"; if (!UI.in && r != "home" && r != "guru") r = "home"; let h = "", gp = ""; RT.forEach(x => { if (x[3] != gp) { gp = x[3]; h += `<div class="ng">${gp}</div>` } h += `<button class="${x[0] == r ? "on" : ""}" onclick="nav('${x[0]}')">${x[1]}</button>` }); $("#nav").innerHTML = h; $("#crumb").textContent = RT.find(x => x[0] == r)[1]; $("#chips").innerHTML = UI.in ? `<span class="chip"><i style="background:${G.c}"></i>Kelompok ${G.n}</span><span class="chip">Progres ${prog(UI.sel)}%</span>` : `<span class="chip">Belum masuk</span>`; $("#app").innerHTML = r == "home" ? V[r]() : `<div class="wrap">${V[r]()}</div>`; rp()
+}
+function sync() { if (/INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName)) return; go() }
+go();
+(async () => { try { const db = await claude.use("db"); if (db) { cfgc = db.collection("gps3cfg"); cfgc.onSnapshot(q => { q.docs.forEach(x => { if (x.id == "main") { cfg = x.data(); apply(cfg); sv("gps3c", cfg) } }); sync() }, () => { }); galc = db.collection("gps3gal"); galc.onSnapshot(q => { GL = {}; q.docs.forEach(x => { GL[x.id] = x.data() }); sync() }, () => { }); dbc = db.collection("gps3"); dbc.onSnapshot(q => { q.docs.forEach(x => { if (/^g\d$/.test(x.id)) D[x.id.slice(1)] = x.data() }); sv("gps3", D); sync() }, () => { }) } } catch (e) {} })();
+</script>
+<script type="module">
+  // Import SDK Firebase dari CDN resmi secara utuh
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+  import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+  // Konfigurasi Firebase Kompas Karya
+  const firebaseConfig = {
+    apiKey: "AIzaSyCvhlA_iEQGIErVMSRAxpVN_AhbKPrMRDU",
+    authDomain: "kompas-karya.firebaseapp.com",
+    projectId: "kompas-karya",
+    storageBucket: "kompas-karya.firebasestorage.app",
+    messagingSenderId: "568270726986",
+    appId: "1:568270726986:web:a9c8a54b47141ed7e1c3b3"
+  };
+
+  // Inisialisasi Firebase & Firestore
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+
+  console.log("Firebase berhasil terhubung ke proyek Kompas Karya!");
+
+  // 1. Fungsi Simpan Misi Kita
+  window.simpanMisiData = async function(namaKelompok, daerahRiset, progresData) {
+    try {
+      await addDoc(collection(db, "misi_kita"), {
+        kelompok: namaKelompok,
+        daerah: daerahRiset,
+        progres: progresData,
+        waktuKirim: serverTimestamp()
+      });
+      alert("Misi kelompok berhasil dikirim dan tersimpan online!");
+    } catch (error) {
+      console.error("Gagal menyimpan misi: ", error);
+      alert("Terjadi kesalahan saat menyimpan data misi.");
+    }
+  };
+
+  // 2. Fungsi Simpan Refleksi Siswa
+  window.simpanRefleksiData = async function(namaSiswa, kelompokSiswa, isiRefleksi) {
+    try {
+      await addDoc(collection(db, "refleksi_siswa"), {
+        nama: namaSiswa,
+        kelompok: kelompokSiswa,
+        refleksi: isiRefleksi,
+        waktuKirim: serverTimestamp()
+      });
+      alert("Refleksi berhasil dikirim dan tersimpan online!");
+    } catch (error) {
+      console.error("Gagal menyimpan refleksi: ", error);
+      alert("Terjadi kesalahan saat mengirim refleksi.");
+    }
+  };
+
+  // 3. Fungsi Simpan Galeri Pameran
+  window.simpanGaleriData = async function(namaKelompok, judulKarya, deskripsiKarya, linkGambar) {
+    try {
+      await addDoc(collection(db, "galeri_pameran"), {
+        kelompok: namaKelompok,
+        judul: judulKarya,
+        deskripsi: deskripsiKarya,
+        gambar: linkGambar,
+        waktuKirim: serverTimestamp()
+      });
+      alert("Karya pameran berhasil dikirim dan tersimpan online!");
+    } catch (error) {
+      console.error("Gagal menyimpan galeri: ", error);
+      alert("Terjadi kesalahan saat mengirim karya pameran.");
+    }
+  };
+
+  // Penghubung Otomatis Form (Misi, Refleksi, dan Galeri)
+  const formMisi = document.getElementById("form-misi");
+  if (formMisi) {
+    formMisi.addEventListener("submit", function(e) {
+      e.preventDefault();
+      window.simpanMisiData(
+        document.getElementById("kelompok").value,
+        document.getElementById("daerah").value,
+        document.getElementById("progres").value
+      );
+      formMisi.reset();
+    });
+  }
+
+  const formRefleksi = document.getElementById("form-refleksi");
+  if (formRefleksi) {
+    formRefleksi.addEventListener("submit", function(e) {
+      e.preventDefault();
+      window.simpanRefleksiData(
+        document.getElementById("namaSiswa").value,
+        document.getElementById("kelompokSiswa").value,
+        document.getElementById("isiRefleksi").value
+      );
+      formRefleksi.reset();
+    });
+  }
+
+  const formGaleri = document.getElementById("form-galeri");
+  if (formGaleri) {
+    formGaleri.addEventListener("submit", function(e) {
+      e.preventDefault();
+      window.simpanGaleriData(
+        document.getElementById("galeriKelompok").value,
+        document.getElementById("galeriJudul").value,
+        document.getElementById("galeriDeskripsi").value,
+        document.getElementById("galeriGambar").value
+      );
+      formGaleri.reset();
+    });
+  }
+</script>
+</body>
+</html>
